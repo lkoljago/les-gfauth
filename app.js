@@ -4,14 +4,13 @@ const fs        = require('fs');
 const colors    = require('colors');
 const bodyParser = require('body-parser');
 const morgan    = require('morgan');
+const mongoose  = require('mongoose');
 
 const app       = express();
 
-const mongoose  = require('mongoose');
-// mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1:27017/gauth');
+mongoose.connect('mongodb://127.0.0.1:27017/gauth', { useNewUrlParser: true, useUnifiedTopology: true });
 const routesUsers = require('./routes/users');
-//middlewфкуы
+//middlewear
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ limit: '25mb', extended: true }));
 app.use(bodyParser.json({ limit: '25mb', extended: true }));

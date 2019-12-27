@@ -1,0 +1,12 @@
+{
+  "web":
+    {
+      "client_id":"752035339031-0lh7pctsth758g7ecr428nejvf0rpu62.apps.googleusercontent.com",
+      "project_id":"test-project-jmasters",
+      "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+      "token_uri":"https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+      "client_secret":"3D5KI0oeDX3izqabpc5cHDEx",
+      "javascript_origins": ["http://localhost:9000", "https://localhost:9000"]
+    }
+}
