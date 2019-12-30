@@ -3,6 +3,7 @@ const JwtStrategy     = require('passport-jwt').Strategy;
 const { ExtractJwt }  = require('passport-jwt');
 const LocalStrategy   = require('passport-local').Strategy;
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
+const FacebookTokenStrategy   = require('passport-facebook-token');
 const { JWT_secret }  = require('./configuration');
 const User            = require('./models/user');
 const colors          = require('colors');
@@ -66,6 +67,36 @@ passport.use(new GooglePlusTokenStrategy({
   
 }));
 
+passport.use('facebookToken', new FacebookTokenStrategy({
+  clientID: '761487861038364',
+  clientSecret: '624f9fdd4cf4dc59a2b4645d7ad41c12'
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    console.log('accessToken facebook '.yellow, accessToken);
+    console.log('refreshToken facebook '.yellow, refreshToken);
+    console.log('profile facebook '.yellow, profile);
+    const existingUser = await User.findOne({ 'facebook.id': profile.id });
+    if (existingUser) {
+      console.log('============= User already exists in DB ============'.red);
+      return done(null, existingUser);
+    }
+    console.log(`=============== create new user ${profile} =================`.blue);
+    
+    const newUser = new User({
+      method: 'facebook',
+      facebook: {
+        id: profile.id,
+        email: profile.emails[0].value
+      }
+    })
+    // if new account
+    await newUser.save();
+    done(null, newUser);
+    
+  } catch(error) {
+    done(error, false, error.message);
+  }
+}))
 
 //LOCAL STRATEGY
 passport.use(new LocalStrategy({
