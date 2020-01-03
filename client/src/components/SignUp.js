@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
+import * as actions from '../actions/index';
 import CustomInput from './CustomInput';
 
 class SignUp extends Component {
-  onSubmit(formData) {
+  constructor(props) {
+    super(props);
+      this.onSubmit = this.onSubmit.bind(this);
+    
+  }
+  async onSubmit(formData) {
     console.log('onSubmit() turn on');
     console.log('formData ', formData);
-    
+    // actions creator
+    await this.props.signUp(formData);
   }
 
   render() {
@@ -49,4 +58,7 @@ class SignUp extends Component {
   }
 };
 
-export default reduxForm({ form: 'singup' })(SignUp);
+export default compose(
+  connect(null, actions),
+  reduxForm({ form: 'signup' })
+) (SignUp);
