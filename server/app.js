@@ -26,3 +26,4 @@ const port = 9000;
 app.listen(port, () => {
   console.log(`server listening on port ${port}`.blue);
 });
+module.exports = app;
