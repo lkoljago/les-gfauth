@@ -1,16 +1,16 @@
-const express = require('express');
+const express   = require('express');
+const r         = require('express').Router();
+const passport  = require('passport');
 
-const r = require('express').Router();
-const passport = require('passport');
-const passportConf = require('../passport');
+const passportConf  = require('../passport');
 
 const { validateBody, schemas } = require('../helpers/routeHelpers');
-const UsersController = require('../controllers/users');
+const UsersController           = require('../controllers/users');
 
-const passportSignIn = passport.authenticate('local', { session: false });
-const passportJWT = passport.authenticate('jwt', { session: false });
-const passportGoogle = passport.authenticate('google-plus-token', { session: false });
-const passportFacebook = passport.authenticate('facebookToken', { session: false });
+const passportSignIn    = passport.authenticate('local', { session: false });
+const passportJWT       = passport.authenticate('jwt', { session: false });
+const passportGoogle    = passport.authenticate('google-plus-token', { session: false });
+const passportFacebook  = passport.authenticate('facebookToken', { session: false });
 
 r.route('/signup')
   .post(validateBody(schemas.authSchema), UsersController.signUp);

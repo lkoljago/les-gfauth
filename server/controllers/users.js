@@ -1,7 +1,8 @@
-const JWT = require('jsonwebtoken');
-const User = require('../models/user');
-const { JWT_secret } = require('../configuration');
-const colors = require('colors');
+const JWT       = require('jsonwebtoken');
+const colors    = require('colors');
+
+const { JWT_secret }  = require('../configuration');
+const User            = require('../models/user');
 
 signToken = user => {
   console.log('user from signToken'.yellow, user);

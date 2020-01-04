@@ -1,12 +1,13 @@
 const passport        = require('passport');
-const JwtStrategy     = require('passport-jwt').Strategy;
-const { ExtractJwt }  = require('passport-jwt');
-const LocalStrategy   = require('passport-local').Strategy;
+const JwtStrategy             = require('passport-jwt').Strategy;
+const { ExtractJwt }          = require('passport-jwt');
+const LocalStrategy           = require('passport-local').Strategy;
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const FacebookTokenStrategy   = require('passport-facebook-token');
+const colors          = require('colors');
+
 const { JWT_secret }  = require('./configuration');
 const User            = require('./models/user');
-const colors          = require('colors');
 
 //JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({
